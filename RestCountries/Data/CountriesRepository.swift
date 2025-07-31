@@ -6,7 +6,7 @@
 //
 
 protocol CountriesRepository {
-    func fetchCurrencies(fields: String) async throws -> [Currencies]
+    func fetchCountries(fields: String) async throws -> [Country]
 }
 
 final class DefaultCountriesRepository: CountriesRepository {
@@ -17,8 +17,8 @@ final class DefaultCountriesRepository: CountriesRepository {
         self.dataTransferService = dataTransferService
     }
     
-    func fetchCurrencies(fields: String) async throws -> [Currencies] {
-        let endpoint = APIEndpoints.getCurrencies(requestDTO: .init(fields: fields))
+    func fetchCountries(fields: String) async throws -> [Country] {
+        let endpoint = APIEndpoints.getCountries(requestDTO: .init(fields: fields))
         do {
             let response = try await dataTransferService.request(with: endpoint)
             let domain = response.map { $0.toDomain() }

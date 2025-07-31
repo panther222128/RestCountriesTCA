@@ -1,5 +1,5 @@
 //
-//  CurrenciesView.swift
+//  CountriesView.swift
 //  RestCountries
 //
 //  Created by Horus on 7/31/25.
@@ -8,20 +8,20 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct CurrenciesView: View {
+struct CountriesView: View {
     
-    let store: StoreOf<CurrenciesFeature>
+    let store: StoreOf<CountriesFeature>
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
                 Button {
-                    viewStore.send(.loadCurrencies)
+                    viewStore.send(.loadCountries)
                 } label: {
-                    Text("Load currencies")
+                    Text("Load countries")
                 }
-                List(viewStore.currencies) { currencies in
-                    Text("\(currencies.currencies)")
+                List(viewStore.countries) { country in
+                    Text("\(country.name.common)")
                 }
             }
         }

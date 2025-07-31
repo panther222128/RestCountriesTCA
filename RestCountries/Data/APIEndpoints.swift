@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIEndpoints {
-    static func getCurrencies(requestDTO: CurrenciesRequestDTO) -> Endpoint<[CurrenciesResponseDTO]> {
+    static func getCountries(requestDTO: CountriesRequestDTO) -> Endpoint<[CountryResponseDTO]> {
         return Endpoint(path: "all", method: .get, queryParametersEncodable: requestDTO)
     }
 }

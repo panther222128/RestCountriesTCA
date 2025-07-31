@@ -10,13 +10,13 @@ import ComposableArchitecture
 
 @main
 struct RestCountriesApp: App {
-    static let currenciesStore = Store(initialState: CurrenciesFeature.State(currencies: [])) { 
-        CurrenciesFeature()
+    static let countriesStore = Store(initialState: CountriesFeature.State(countries: [])) {
+        CountriesFeature()
     }
     
     var body: some Scene {
         WindowGroup {
-            CurrenciesView(store: RestCountriesApp.currenciesStore)
+            CountriesView(store: RestCountriesApp.countriesStore)
         }
     }
 }

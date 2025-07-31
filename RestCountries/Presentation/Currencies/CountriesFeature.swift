@@ -1,5 +1,5 @@
 //
-//  CurrenciesFeature.swift
+//  CountriesFeature.swift
 //  RestCountries
 //
 //  Created by Horus on 7/31/25.
@@ -8,16 +8,16 @@
 import ComposableArchitecture
 
 @Reducer
-struct CurrenciesFeature {
+struct CountriesFeature {
     
     @ObservableState
     struct State: Equatable {
-        var currencies: [Currencies]
+        var countries: [Country]
     }
     
     enum Action {
-        case loadCurrencies
-        case currenciesLoaded([Currencies])
+        case loadCountries
+        case countriesLoaded([Country])
     }
     
     @Dependency(\.countriesRepository) var countriesRepository
@@ -25,20 +25,18 @@ struct CurrenciesFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .loadCurrencies:
+            case .loadCountries:
                 return .run { send in
                     do {
-                        let currencies = try await countriesRepository.fetchCurrencies(fields: "currencies")
-                        await send(.currenciesLoaded(currencies))
+                        let countries = try await countriesRepository.fetchCountries(fields: "name")
+                        await send(.countriesLoaded(countries))
                     } catch let error {
                         print(error)
                     }
                 }
                 
-            case let .currenciesLoaded(currencies):
-                state.currencies = currencies
-                print("Currencies: \(currencies)")
-                print("State currencies: \(state.currencies)")
+            case let .countriesLoaded(countries):
+                state.countries = countries
                 return .none
                 
             }
